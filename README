@@ -4,3 +4,7 @@ Se ha de tener en cuenta que está adaptado a la última radio china
 utilizada en las versiones de froyo.
 
 Para la radio de CyanogenMod o la versión oficial de Eclair el dispositivo no tendrá cobertura.
+
+Incluir en manifiest.xml:
+
+<project path="device/orange/Boston/proprietary" name="CML/device_orange_boston" remote="github" revision="gingerbread" />
