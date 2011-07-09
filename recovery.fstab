@@ -8,3 +8,4 @@
 /hidden		yaffs2		hidden
 /sdcard		vfat		/dev/block/mmcblk0p1	/dev/block/mmcblk0
 /system		yaffs2		system
+/sd-ext		ext4		/dev/block/mmcblk0p2	NULL	ext3

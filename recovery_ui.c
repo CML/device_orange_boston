@@ -21,7 +21,10 @@
 #include "common.h"
 #include "extendedcommands.h"
 
-char* MENU_HEADERS[] = { NULL };
+char* MENU_HEADERS[] = { "Utiliza el trackball para moverse por el menu.",
+                         "Pulse el trackball para seleccionar.",
+                         "",
+                         NULL };
 
 char* MENU_ITEMS[] = { "Reiniciar ahora",
                        "Aplicar SD:update.zip",
@@ -31,13 +34,14 @@ char* MENU_ITEMS[] = { "Reiniciar ahora",
                        "Guardar y restabecer copias",
                        "Montaje y almacenamiento",
                        "Avanzado",
+					   "Apagar",
                        NULL };
 
 int device_recovery_start() {
-	/* Unlock trackball */
-	int fd = open("/sys/module/minitrackball/parameters/lockjogball", O_WRONLY);
-	write(fd,"0",1);
-	close(fd);
+    /* Unlock trackball */
+    int fd = open("/sys/module/minitrackball/parameters/lockjogball", O_WRONLY);
+        write(fd,"0",1);
+        close(fd);
     return 0;
 }
 

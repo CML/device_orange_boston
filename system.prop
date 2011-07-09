@@ -27,7 +27,7 @@ ro.telephony.gsm.sms.auto-reg=false
 ro.telephony.call_ring.multiple=false
 ro.telephony.ecclist=112
 ro.telephony.gsm.voicemail=
-ro.telephony.call_ring.delay=500
+ro.telephony.call_ring.delay=1000
 
 DEVICE_PROVISIONED=1
 keyguard.no_require_sim=true

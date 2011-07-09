@@ -47,8 +47,6 @@ PRODUCT_COPY_FILES += \
 ## RIL related stuff
 PRODUCT_COPY_FILES += \
     device/orange/Boston/spn-conf.xml:system/etc/spn-conf.xml \
-    device/orange/Boston/prebuilt/libril.so:system/lib/libril.so \
-    device/orange/Boston/prebuilt/rild:system/bin/rild \
     vendor/orange/Boston/proprietary/bin/qmuxd:system/bin/qmuxd \
     vendor/orange/Boston/proprietary/lib/liboncrpc.so:system/lib/liboncrpc.so \
     vendor/orange/Boston/proprietary/lib/libmmgsdilib.so:system/lib/libmmgsdilib.so \
@@ -123,11 +121,10 @@ PRODUCT_COPY_FILES += \
     device/orange/Boston/prebuilt/init.qcom.bt.sh:system/bin/init.qcom.bt.sh \
     vendor/orange/Boston/proprietary/lib/libms3c_yamaha.so:system/lib/libms3c_yamaha.so \
     vendor/orange/Boston/proprietary/lib/libsensor_yamaha.so:system/lib/libsensor_yamaha.so \
-    device/orange/Boston/ms3c_charger_offset.cfg:system/etc/ms3c_charger.cfg \
-    device/orange/Boston/ms3c_transformation.cfg:system/etc/ms3c_transform.cfg \
+    device/commtiva/z71/ms3c_charger_offset.cfg:system/etc/ms3c_charger_offset.cfg \
+    device/commtiva/z71/ms3c_transformation.cfg:system/etc/ms3c_transformation.cfg \
     vendor/orange/Boston/proprietary/bin/updateSensorNV:system/bin/updateSensorNV \
     vendor/orange/Boston/proprietary/bin/sensorserver_yamaha:system/bin/sensorserver_yamaha \
-    device/orange/Boston/prebuilt/sensordaemon:system/bin/sensordaemon \
     vendor/orange/Boston/proprietary/lib/hw/sensors.qcom.so:system/lib/hw/sensors.qcom.so \
     vendor/orange/Boston/proprietary/bin/gsensorcalibration:system/bin/gsensorcalibration \
     device/orange/Boston/prebuilt/SensorCalibration.apk:system/app/SensorCalibration.apk \

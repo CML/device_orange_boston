@@ -4,14 +4,13 @@ on fs
  	mount yaffs2 mtd@hidden /hidden nosuid nodev
 	chown system hidden /hidden
 	chmod 0551 /hidden
-	#Se prepara hidden para el fix del sensor de rotacion
-	mkdir /hidden/etc
     #Fin CML	
     mkdir /misc
     mount yaffs2 mtd@misc /misc nosuid nodev
     chown system system /misc
     chmod 0777 /misc
     mkdir /misc/sensor 0777 system system
+    mkdir /misc/ms3c 0775 system system
 
     mkdir /misc2
     mount yaffs2 mtd@misc2 /misc2 nosuid nodev
@@ -23,6 +22,12 @@ on fs
     ## Used by libsensors
     symlink /dev/lightsensor /dev/cm3602_alsps
 
+    ## Copy stock files to a writeable location
+    copy /system/etc/ms3c_transformation.cfg /misc/ms3c/transformation.cf
+    copy /system/etc/ms3c_charger_offset.cfg /misc/ms3c/charger_offset.cf
+    chown system system /misc/ms3c/transformation.cf
+    chown system system /misc/ms3c/charger_offset.cf
+
 on early-init
     start hwprops
 
@@ -30,16 +35,16 @@ on property:dev.bootcomplete=1
 #+++FIH_misty enable keypad interrupt until boot complete
     chmod 0666 /sys/module/7x27_kybd/parameters/EnableKeyIntrrupt
     write /sys/module/7x27_kybd/parameters/EnableKeyIntrrupt 1
-    #CML Optimizacion de LowMemoryKiller y cache de la SD para Boston
+    #CML Optimizacion de LowMemoryKiller
 	write /sys/module/lowmemorykiller/parameters/minfree 1536,3072,4096,10240,8960,16640
-	write /sys/block/mmcblk0/bdi/read_ahead_kb 1024
-	write /sys/devices/virtual/bdi/179:0/read_ahead_kb 1024
     #Fin CML
-
-    start sensor-fix
 
 #---enable keypad interrupt until boot complete
 on boot
+
+    ## cpufreq configurations
+    write /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate 500000
+
     ## RIL needs this
     mkdir /data/radio 0777
 
@@ -84,6 +89,9 @@ on boot
     chown system system /sys/class/leds/green/blink
     chown system system /sys/bus/i2c/devices/0-0045/powerbtn
 
+    # Speed up SD Card
+    write /sys/block/mmcblk0/bdi/read_ahead_kb 2048
+
 on property:init.svc.bluetoothd=running
     write /sys/devices/virtual/bluetooth/hci0/idle_timeout 7000
     start abtfilt
@@ -122,9 +130,8 @@ service abtfilt /system/bin/abtfilt -c -d -z -n
     oneshot
 
 service sensor-daemon /system/bin/sensorserver_yamaha
+    #user compass
+    #user should be compass, but then we miss permissions to register the service
     user root
-    group root
+    group root 
 
-service sensor-fix /system/bin/sensordaemon
-    disabled
-    oneshot

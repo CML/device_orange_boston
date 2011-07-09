@@ -1,5 +1,5 @@
 #!/system/bin/sh
-# Copyright (c) 2009-2010, Code Aurora Forum. All rights reserved.
+# Copyright (c) 2009, Code Aurora Forum. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -84,10 +84,11 @@ QSOC_TYPE=${2:-"any"}
 QSOC_BAUD=${3:-"3000000"}
 
 /system/bin/hci_qcomm_init -d $QSOC_DEVICE -s $QSOC_BAUD -r 32000000
+
 exit_code_hci_qcomm_init=$?
 
 case $exit_code_hci_qcomm_init in
-  0) logi "Bluetooth QSoC firmware download succeeded, $BTS_DEVICE $BTS_TYPE $BTS_BAUD $BTS_ADDRESS";;
+  0) logi "Bluetooth QSoC firmware download succeeded";;
   *) failed "Bluetooth QSoC firmware download failed" $exit_code_hci_qcomm_init;;
 esac
 
