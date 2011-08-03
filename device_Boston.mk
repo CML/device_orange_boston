@@ -121,8 +121,8 @@ PRODUCT_COPY_FILES += \
     device/orange/Boston/prebuilt/init.qcom.bt.sh:system/bin/init.qcom.bt.sh \
     vendor/orange/Boston/proprietary/lib/libms3c_yamaha.so:system/lib/libms3c_yamaha.so \
     vendor/orange/Boston/proprietary/lib/libsensor_yamaha.so:system/lib/libsensor_yamaha.so \
-    device/commtiva/z71/ms3c_charger_offset.cfg:system/etc/ms3c_charger_offset.cfg \
-    device/commtiva/z71/ms3c_transformation.cfg:system/etc/ms3c_transformation.cfg \
+    device/orange/Boston/ms3c_charger_offset.cfg:system/etc/ms3c_charger_offset.cfg \
+    device/orange/Boston/ms3c_transformation.cfg:system/etc/ms3c_transformation.cfg \
     vendor/orange/Boston/proprietary/bin/updateSensorNV:system/bin/updateSensorNV \
     vendor/orange/Boston/proprietary/bin/sensorserver_yamaha:system/bin/sensorserver_yamaha \
     vendor/orange/Boston/proprietary/lib/hw/sensors.qcom.so:system/lib/hw/sensors.qcom.so \
