@@ -1,0 +1,17 @@
+#!/system/bin/sh
+#Se procede a crear los enlaces simbolicos en la particion hidden, la cual siempre esta en modo escritura.
+#De esta forma se puede grabar correctamente los sensores AXIS.
+#Solo se invertiran si de forma premeditada se pone en modo lectura la particion hidden
+sleep 2;
+stop sensor-daemon
+rwsystem
+/system/xbin/cp /system/etc/ms3c_transform.cfg /hidden/etc/ms3c_transformation.cfg
+chmod 777 /hidden/etc/ms3c_transformation.cfg
+/system/xbin/ln -s /hidden/etc/ms3c_transformation.cfg /system/etc/ms3c_transformation.cfg
+/system/xbin/cp /system/etc/ms3c_charger.cfg /hidden/etc/ms3c_charger_offset.cfg
+chmod 777 /hidden/etc/ms3c_charger_offset.cfg
+/system/xbin/ln -s /hidden/etc/ms3c_charger_offset.cfg /system/etc/ms3c_charger_offset.cfg
+start sensor-daemon
+sleep 30;
+setprop gsm.version.baseband PR3_900
+rosystem

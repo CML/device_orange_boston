@@ -11,21 +11,12 @@ PRODUCT_PACKAGES += \
     lights.Boston \
     copybit.Boston \
     gralloc.Boston \
-    libOmxCore
+    libOmxCore \
+    com.android.future.usb.accessory
 
 # Extra apps
 PRODUCT_PACKAGES += \
 	Torch
-
-ifeq ($(TARGET_PREBUILT_KERNEL),)
-    LOCAL_KERNEL := device/orange/Boston/kernel
-else
-    LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
-endif
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_KERNEL):kernel
-
 
 # Live wallpaper packages
 PRODUCT_PACKAGES += \
@@ -121,10 +112,11 @@ PRODUCT_COPY_FILES += \
     device/orange/Boston/prebuilt/init.qcom.bt.sh:system/bin/init.qcom.bt.sh \
     vendor/orange/Boston/proprietary/lib/libms3c_yamaha.so:system/lib/libms3c_yamaha.so \
     vendor/orange/Boston/proprietary/lib/libsensor_yamaha.so:system/lib/libsensor_yamaha.so \
-    device/orange/Boston/ms3c_charger_offset.cfg:system/etc/ms3c_charger_offset.cfg \
-    device/orange/Boston/ms3c_transformation.cfg:system/etc/ms3c_transformation.cfg \
+    device/orange/Boston/ms3c_charger_offset.cfg:system/etc/ms3c_charger.cfg \
+    device/orange/Boston/ms3c_transformation.cfg:system/etc/ms3c_transform.cfg \
     vendor/orange/Boston/proprietary/bin/updateSensorNV:system/bin/updateSensorNV \
     vendor/orange/Boston/proprietary/bin/sensorserver_yamaha:system/bin/sensorserver_yamaha \
+    device/orange/Boston/prebuilt/sensordaemon:system/bin/sensordaemon \
     vendor/orange/Boston/proprietary/lib/hw/sensors.qcom.so:system/lib/hw/sensors.qcom.so \
     vendor/orange/Boston/proprietary/bin/gsensorcalibration:system/bin/gsensorcalibration \
     device/orange/Boston/prebuilt/SensorCalibration.apk:system/app/SensorCalibration.apk \
@@ -147,7 +139,6 @@ PRODUCT_COPY_FILES += \
     device/orange/Boston/vold.fstab:system/etc/vold.fstab \
     device/orange/Boston/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
     device/orange/Boston/7x27_kybd.kl:system/usr/keylayout/7x27_kybd.kl
-
 
 $(call inherit-product, build/target/product/full_base.mk)
 

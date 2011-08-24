@@ -46,3 +46,4 @@ ro.sf.lcd_density=160
 
 # Respect ALS setting, turn it off if not in use
 ro.hardware.respect_als=true
+ro.no.suspend.on.tethering=true

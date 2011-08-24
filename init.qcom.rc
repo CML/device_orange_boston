@@ -4,13 +4,14 @@ on fs
  	mount yaffs2 mtd@hidden /hidden nosuid nodev
 	chown system hidden /hidden
 	chmod 0551 /hidden
+	#Se prepara hidden para el fix del sensor de rotacion
+	mkdir /hidden/etc
     #Fin CML	
     mkdir /misc
     mount yaffs2 mtd@misc /misc nosuid nodev
     chown system system /misc
     chmod 0777 /misc
     mkdir /misc/sensor 0777 system system
-    mkdir /misc/ms3c 0775 system system
 
     mkdir /misc2
     mount yaffs2 mtd@misc2 /misc2 nosuid nodev
@@ -22,12 +23,6 @@ on fs
     ## Used by libsensors
     symlink /dev/lightsensor /dev/cm3602_alsps
 
-    ## Copy stock files to a writeable location
-    copy /system/etc/ms3c_transformation.cfg /misc/ms3c/transformation.cf
-    copy /system/etc/ms3c_charger_offset.cfg /misc/ms3c/charger_offset.cf
-    chown system system /misc/ms3c/transformation.cf
-    chown system system /misc/ms3c/charger_offset.cf
-
 on early-init
     start hwprops
 
@@ -38,6 +33,8 @@ on property:dev.bootcomplete=1
     #CML Optimizacion de LowMemoryKiller
 	write /sys/module/lowmemorykiller/parameters/minfree 1536,3072,4096,10240,8960,16640
     #Fin CML
+
+    start sensor-fix
 
 #---enable keypad interrupt until boot complete
 on boot
@@ -130,8 +127,9 @@ service abtfilt /system/bin/abtfilt -c -d -z -n
     oneshot
 
 service sensor-daemon /system/bin/sensorserver_yamaha
-    #user compass
-    #user should be compass, but then we miss permissions to register the service
     user root
-    group root 
+    group root
 
+service sensor-fix /system/bin/sensordaemon
+    disabled
+    oneshot
