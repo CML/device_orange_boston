@@ -5,6 +5,7 @@
 sleep 2;
 stop sensor-daemon
 rwsystem
+chmod 777 /data/misc/wifi/wpa_supplicant.conf
 /system/xbin/cp /system/etc/ms3c_transform.cfg /hidden/etc/ms3c_transformation.cfg
 chmod 777 /hidden/etc/ms3c_transformation.cfg
 /system/xbin/ln -s /hidden/etc/ms3c_transformation.cfg /system/etc/ms3c_transformation.cfg
@@ -12,6 +13,4 @@ chmod 777 /hidden/etc/ms3c_transformation.cfg
 chmod 777 /hidden/etc/ms3c_charger_offset.cfg
 /system/xbin/ln -s /hidden/etc/ms3c_charger_offset.cfg /system/etc/ms3c_charger_offset.cfg
 start sensor-daemon
-sleep 30;
-setprop gsm.version.baseband PR3_900
 rosystem

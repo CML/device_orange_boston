@@ -18,6 +18,15 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
 	Torch
 
+ifeq ($(TARGET_PREBUILT_KERNEL),)
+    LOCAL_KERNEL := device/orange/Boston/kernel
+else
+    LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
+endif
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_KERNEL):kernel
+
 # Live wallpaper packages
 PRODUCT_PACKAGES += \
     LiveWallpapers \
@@ -103,8 +112,7 @@ PRODUCT_COPY_FILES += \
     device/orange/Boston/prebuilt/athwlan.bin.z77:system/etc/firmware/athwlan.bin.z77 \
     device/orange/Boston/prebuilt/calData_ar6102_15dBm.bin:system/etc/firmware/calData_ar6102_15dBm.bin \
     device/orange/Boston/hostapd.conf:system/etc/wifi/hostapd.conf \
-    vendor/orange/Boston/proprietary/bin/hostapd:system/bin/hostapd \
-    device/orange/Boston/prebuilt/wpa_supplicant:system/bin/wpa_supplicant
+    vendor/orange/Boston/proprietary/bin/hostapd:system/bin/hostapd
 
 ## Other libraries and proprietary binaries
 PRODUCT_COPY_FILES += \

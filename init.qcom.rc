@@ -68,6 +68,7 @@ on boot
     ## Wifi RFKill
     chown wifi wifi /sys/class/rfkill/rfkill1/state
     chmod 0660 /sys/class/rfkill/rfkill1/state
+	chmod 0666 /data/misc/wifi/*
 
     ## Enable trackball
     write /sys/module/minitrackball/parameters/lockjogball 0
@@ -106,7 +107,7 @@ service hciattach /system/bin/sh /system/bin/init.qcom.bt.sh
 
 service qmuxd /system/bin/qmuxd
 
-service wpa_supplicant /system/bin/wpa_supplicant -Dwext -iwlan0 -c/data/misc/wifi/wpa_supplicant.conf
+service wpa_supplicant /system/bin/wpa_supplicant -Dawext -iwlan0 -W -c/data/misc/wifi/wpa_supplicant.conf
     group wifi inet
     socket wpa_wlan0 dgram 660 wifi wifi
     disabled
